@@ -1,2 +1,32 @@
 # living-papers-template
+
 A Living Papers article starter template.
+Copy this repository and edit to make your own article.
+
+This template is setup to produce a web-based article from a Markdown source file named `index.md`. All figures, datasets, and other external files should be placed in the `assets` folder.
+
+## Instructions
+
+### Pre-Requisites
+
+Before working with Living Papers, set up your local environment:
+
+1. Install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if you don't have them already. We recommend using a node version manager like [nvm](https://github.com/nvm-sh/nvm).
+2. Install [pandoc](https://pandoc.org/installing.html). You should be able to run `pandoc` from the command line.
+3. Install other software packages as needed:
+  - To use R code blocks, install [R](https://cloud.r-project.org/) along with the `knitr` package and other libraries you wish to use. For example,
+  if you want to use tidyverse libraries and SVG graphics output:
+    - `install.packages(c("knitr", "tidyverse", "svglite"))`
+  - To publish LaTeX / PDF output,  install a TeX distribution such as [TeX Live](https://www.tug.org/texlive/).
+
+### Article Setup
+
+- Clone or copy the content of this repository. For example, click the green "Code" button, select "Download ZIP", and unpack into a new working folder.
+- Run `npm i` to install all JavaScript dependencies.
+- Now you're ready to start writing!
+
+### Article Development
+
+- Run `npm run build` to compile your article to a web page. The output will be written to the `build` directory.
+- Run `npm run watch` to "watch" your source `index.md` file and automatically recompile it when it changes. This command will also launch a local web server, open your browser, and automatically update the web page view upon updates. Use Control-C to stop watching and shut down the local server.
+- Once your article is ready -- and if you are working in your own dedicated GitHub repo -- run `npm run deploy` to publish your article to [GitHub pages](https://pages.github.com/). This action copies the content of the `build` folder to your GitHub page branch.

@@ -1,0 +1,22 @@
+{
+  "name": "@living-papers/article-template",
+  "version": "0.0.1",
+  "license": "BSD-3-Clause",
+  "repository": "uwdata/living-papers-template",
+  "scripts": {
+    "assets": "mkdirp build && cp -r assets build",
+    "clean": "rimraf .cache .temp build",
+    "prebuild": "npm run assets",
+    "build": "lpub -o build --tempDir='.temp' index.md",
+    "prewatch": "npm run assets",
+    "watch": "lpub -o build --tempDir='.temp' --watch index.md",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "@living-papers/cli": "^0.0.5",
+    "gh-pages": "^4.0.0",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2"
+  }
+}
