@@ -5,6 +5,8 @@ Copy this repository and edit to make your own article.
 
 This template is set up to produce a web-based article from a Markdown source file named `index.md`. Any figures, datasets, and other external files should be placed in the `assets` folder.
 
+View the published sample article content at [https://uwdata.github.io/living-papers-template/](https://uwdata.github.io/living-papers-template/).
+
 ## Instructions
 
 ### Pre-Requisites
