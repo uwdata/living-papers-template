@@ -1,6 +1,6 @@
 # living-papers-template
 
-A Living Papers article starter template.
+A [Living Papers](https://github.com/uwdata/living-papers/) article starter template.
 Copy this repository and edit to make your own article.
 
 This template is set up to produce a web-based article from a Markdown source file named `index.md`. Any figures, datasets, and other external files should be placed in the `assets` folder.
