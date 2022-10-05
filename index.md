@@ -17,7 +17,7 @@ output:
 ::: abstract
 With Living Papers, you can author an interactive web page or standard reseach paper from Markdown source documents.
 This example article demonstrates the basic syntax and functionality of a Living Papers document.
-Compare the source code and the resulting rendered web page!
+Compare the [source markup](https://raw.githubusercontent.com/uwdata/living-papers-template/main/index.md) and the resulting [rendered web page](https://uwdata.github.io/living-papers-template/)!
 :::
 
 # Basic Formatting
