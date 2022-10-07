@@ -197,7 +197,7 @@ step = 0.1
 ---
 sinc = x => x === 0 ? 1 : (Math.sin(Math.PI * x) / (Math.PI * x))
 ---
-format = x => x.toFixed(2).replace('-0', '0')
+format = x => x.toFixed(2).replace('-0.00', '0.00')
 ```
 
 ::: figure { #graph .margin }
