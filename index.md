@@ -4,9 +4,6 @@ author:
   - name: The Living Papers Team
     org: University of Washington
 keywords: [all, about, my, article]
-output:
-  html:
-    minify: false
 ---
 
 ::: teaser {#teaser}
@@ -54,6 +51,12 @@ And an `equation` block:
 
 # Figures & Tables
 
+<!--
+Figures and tables are placed in the main column by default.
+Use the {.margin} class to place them in the right margin,
+or use the `{.page}` class to span the page width.
+-->
+
 ::: table {#irrational .margin}
 | Symbol | Value       |
 | :----- | ----------- |
@@ -65,9 +68,8 @@ And an `equation` block:
 :::
 
 <!--
-Figures and tables are placed in the main column by default.
-Use the {.margin} class to place them in the right margin,
-or use the `{.page}` class to span the page width.
+Captions are distinguished from figure/table content using a preceding pipe (`|`) character.
+To avoid confusion, table content and captions must be separated by an empty line.
 -->
 
 Basic images and tables can be included without adornment using standard Markdown.
@@ -78,15 +80,10 @@ To create numbered and captioned elements, place content within `:::`-fenced `fi
 | A depiction of the Golden Ratio ($\phi$).
 :::
 
-<!--
-Captions are distinguished from figure/table content using a preceding pipe (`|`) character.
-To avoid confusion, table content and captions must be separated by an empty line.
--->
-
 # Citations
 
 Give credit where credit is due!
-For example, Living Papers was inspired by earlier work by @doi:10.1145/3242587.3242600 on the [Idyll language](https://idyll-lang.org/docs).
+Living Papers was inspired by earlier work by @doi:10.1145/3242587.3242600 on the [Idyll language](https://idyll-lang.org/docs).
 Living Papers supports citations references with author name(s) or with reference number only [@doi:10.1145/3242587.3242600].
 Citations are also _interactive_: click/tap a citation to view a pop-up with more information.
 
@@ -133,9 +130,13 @@ Cross-references use a syntax similar to citations:
 
 By default, a descriptive prefix like "Figure" is included.^[To show a reference number only, wrap the reference like so: `[-@fig:goldenratio]` → [-@fig:goldenratio].]
 
-
-
 # Interactive Figures
+
+<!--
+JavaScript code blocks evaluate code in the Observable JavaScript dialect.
+Use the .hide class to prevent output from being shown in the document.
+To show JavaScript code (not evaluate it) use the { .code } class.
+-->
 
 ``` js { .hide }
 import { Scrubber } from "@jheer/scrubber"
@@ -164,6 +165,7 @@ viewof sep = Scrubber([1, 100], {
 We can define multiple code cells using the --- delimiter.
 Only output from the last cell is shown.
 -->
+
 ``` js
 size = 25
 ---
@@ -186,10 +188,6 @@ svg`<svg width="${800}" height="${2*size+pad}" viewBox="0 0 800 ${2*size+pad}">
 | An interactive, explorable version of @fig:teaser. Can you deconstruct the shapes?
 :::
 
-<!--
-We use .hide to prevent output from being shown in the document.
-To show JavaScript code (not evaluate it) use the { .code } class.
--->
 ``` js { .hide }
 value = -10
 ---
@@ -203,21 +201,6 @@ format = x => x.toFixed(2).replace('-0', '0')
 ```
 
 ::: figure { #graph .margin }
-<!-- ``` js
-Plot.plot({
-  marginLeft: 50,
-  y: { grid: true },
-  marks: [
-    Plot.ruleX([value], { stroke: '#888' }),
-    Plot.line(
-      d3.range(0, Math.max(max + 1, value)),
-      { x: d => d, y: d => d * d, stroke: 'steelblue', strokeWidth: 2 }
-    ),
-    Plot.dot([value], { x: d => d, y: d => d * d, fill: 'steelblue' })
-  ],
-  width: 400,
-  height: 300
-}) -->
 ``` js
 Plot.plot({
   y: { grid: true },
@@ -243,9 +226,20 @@ Scrubber([-max, max], {
 :::
 
 <!--
-Math components also support dynamic updates with embedded JavaScript!
-If we denote inline math using double dollar signs ($$), we can then use
-single dollar signs (${js_code}) for template string interpolation.
+Above we use the built-in `range-text` component for a draggable number.
+Custom web components are specified using the syntax:
+ [:component-name:]{attribute1=value1 attribute2=value2}
+
+Under the hood, TeX math elements are also components that support dynamic
+updates with embedded JavaScript! If we denote inline math using double
+dollar signs ($$), we can then use single dollar signs (${js_code}) for
+JavaScript template string interpolation.
+
+We use a `bind` attribute on both the draggable text and code-generated
+input elements to _bind_ each of these inputs to a shared value.
+The `bind` functionality requires that inputs conform to a simple interface:
+the element must fire `input` events upon changes, and expose a `value`
+property that can be used to get/set the element's current value.
 -->
 
 Living Papers support *interactive* content using JavaScript code blocks and an extensible component system, all connected via a shared reactive runtime.
@@ -255,7 +249,7 @@ Living Papers uses the same JavaScript dialect as [Observable notebooks](https:/
 We can define variables, add input widgets, and generate figures (e.g., using [Vega-Lite](https://observablehq.com/@observablehq/vega-lite) or [Observable Plot](https://observablehq.com/@observablehq/plot), as in @fig:graph) just as we would in a notebook.
 We can also directly import content from public Observable notebooks, like this [D3](https://d3js.org/)-based [line chart of unemployment rates by U.S. county](https://observablehq.com/@d3/multi-line-chart):
 
-```js
+``` js
 chartWidth = 775
 ---
 import { chart as d3LineChart } with { chartWidth as width }
@@ -263,28 +257,6 @@ from '@d3/multi-line-chart'
 ---
 d3LineChart
 ```
-
-<!--
-Custom web components are specified using the following syntax:
-
-- `[:component-name:]{attribute1=value1 attribute2=value2}`
-
-Above, we use the built-in `range-text` component to add a draggable number.
-Underneath the hood, TeX math elements are also components!
-See the Markdown source to see how you can create the dynamic math equation in the figure caption.
-
-We also use a `bind` attribute on both the draggable text and an Observable `Inputs.range` slider to _bind_ each of these inputs to a shared value.
-The `bind` functionality requires that inputs conform to a simple interface: the element must fire `input` events upon changes, and expose a `value` property that can be used to get/set the element's current value.
-
-Another simple type of a component is an _action link_, which when clicked, updates one or more reactive variables in response.
-Living Papers re-uses hyperlink syntax, but with `` `code` `` backticks to define the updates:
-[``[link text](` ``]{}`value = 5; max = 512;`{.js}[`` ` "Tooltip text.")``]{}
-
-Living Papers uses [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) as a standards-compliant way to provide custom displays and interactive behaviors.
-We use [Lit](https://lit.dev/) to implement the built-in components.
-The component library is extensible: developers can implement their own custom components and add them to articles.
--->
-
 
 # And more...
 
