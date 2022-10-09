@@ -14,7 +14,8 @@ View the published sample article content at [https://uwdata.github.io/living-pa
 Before working with Living Papers, set up your local environment:
 
 1. Install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if you don't have them already. We recommend using a node version manager like [nvm](https://github.com/nvm-sh/nvm). Node v16.17 or higher is recommended.
-2. Install [pandoc](https://pandoc.org/installing.html). You should be able to run `pandoc` from the command line.
+2. Install [pandoc >= 2.18](https://pandoc.org/installing.html). You should be able to run `pandoc` from the command line.
+  - On Ubuntu, `apt` doesn't have the latest version. You can either go through pandoc's listed installation process or use [conda](https://docs.conda.io/en/latest/miniconda.html) (`conda install pandoc`).
 3. Install other software packages as needed:
   - To use R code blocks, install [R](https://cloud.r-project.org/) along with the `knitr` package and other libraries you wish to use. For example,
   if you want to use tidyverse libraries and SVG graphics output:
