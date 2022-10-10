@@ -7,6 +7,8 @@ This template is set up to produce a web-based article from a Markdown source fi
 
 View the published sample article content at [https://uwdata.github.io/living-papers-template/](https://uwdata.github.io/living-papers-template/).
 
+For more usage examples, see the [example articles](https://github.com/uwdata/living-papers/tree/main/examples) in the main Living Papers repository.
+
 ## Instructions
 
 ### Pre-Requisites
