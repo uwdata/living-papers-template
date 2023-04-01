@@ -8,7 +8,7 @@ keywords: [all, about, my, article]
 
 ::: teaser {#teaser}
 ![](assets/squarebow.svg)
-| A teaser image for the beginning of our article.
+| A teaser image for the beginning of our article. [Scroll down for an interactive version!]{.html:only}
 :::
 
 ::: abstract
@@ -134,15 +134,15 @@ By default, a descriptive prefix like "Figure" is included.^[To show a reference
 
 <!--
 JavaScript code blocks evaluate code in the Observable JavaScript dialect.
-Use the .hide class to prevent output from being shown in the document.
+Use the hide attribute to prevent output from being shown in the document.
 To show JavaScript code (not evaluate it) use the { .code } class.
 -->
 
-``` js { .hide }
+``` js { hide=true }
 import { Scrubber } from "@jheer/scrubber"
 ```
 
-::: figure
+::: figure {.html:only}
 ``` js
 viewof rot = Scrubber([0, 10], {
   step: 0.05,
@@ -188,7 +188,7 @@ svg`<svg width="${800}" height="${2*size+pad}" viewBox="0 0 800 ${2*size+pad}">
 | An interactive, explorable version of @fig:teaser. Can you deconstruct the shapes?
 :::
 
-``` js { .hide }
+``` js { hide=true }
 value = -10
 ---
 max = 10
