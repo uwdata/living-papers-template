@@ -1,6 +1,6 @@
 {
   "name": "@living-papers/article-template",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "BSD-3-Clause",
   "repository": "uwdata/living-papers-template",
   "scripts": {
@@ -14,9 +14,9 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "@living-papers/cli": "^0.0.6",
-    "gh-pages": "^4.0.0",
-    "mkdirp": "^1.0.4",
-    "rimraf": "^3.0.2"
+    "@living-papers/cli": "^0.1.2",
+    "gh-pages": "^5.0.0",
+    "mkdirp": "^2.1.6",
+    "rimraf": "^4.4.1"
   }
 }
