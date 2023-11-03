@@ -6,13 +6,11 @@ author:
 keywords: [all, about, my, article]
 ---
 
-::: abstract
-Documentation of [Living Papers](https://github.com/uwdata/living-papers)
-:::
+This is documentation of [Living Papers](https://github.com/uwdata/living-papers), a toolkit for authoring interactive scholarly documents. Users use a markdown source to create web pages or research papers with various output types available such as PDF and LaTeX. 
 
 # Text
 
-Basic text formatting includes:
+Basic text formatting is similar to Markdown and includes:
 
 ::: table {#textformat}
 | Syntax | Value       |
@@ -44,7 +42,7 @@ results in
 
 # Code and Math
 
-Living Papers supports inline code and [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics) for math
+Living Papers supports inline code from different coding languaes. [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics) for math is also supported to writing equations.
 
 ::: table {#codeformat}
 | Syntax | Value       |
@@ -56,7 +54,7 @@ Living Papers supports inline code and [TeX syntax](https://en.wikibooks.org/wik
 | Math and code
 :::
 
-For `math`` blocks: 
+For `math` blocks: 
 
 ~~~ math
 -b \pm \sqrt{b^2 - 4ac} \over 2a
@@ -74,7 +72,7 @@ is achieved with
 
 # Tables 
 
-The syntax for tables in Living Papers follow a similar format as tables in Markdown
+The syntax for tables in Living Papers follow a similar format as tables in Markdown. However, the table syntax must be fenced with `:::` blocks, which is syntax for a Living Papers specific block. You may also provide a name for the content within the blocks, which makes cross-referencing possible.
 
 ```
 ::: table {#tablename}
@@ -105,7 +103,7 @@ To avoid confusion, table content and captions must be separated by an empty lin
 
 # Figures
 
-Like tables, for figures place content within `:::`-fenced `figure` blocks:
+Like tables, figures must be placed within `:::`-fenced `figure` blocks.
 
 ```
 ::: figure {#figure .center}
@@ -123,9 +121,8 @@ results in
 
 # Citations
 
-Citations can be defined in [BibTeX](https://en.wikipedia.org/wiki/BibTeX) format, either in an external file (listed under the `references` key of the article metadata) or included anywhere in the document in a `bibliography` block:
+Citations can be defined in [BibTeX](https://en.wikipedia.org/wiki/BibTeX) format, either in an external file (listed under the `references` key of the article metadata) or included anywhere in the document in a `bibliography` block. An example of a bibliography block for BibTeX is shown below.
 
-For BibTeX, 
 ``` {.smaller}
 ~~~ bibliography
 @inproceedings{conlen2021,
@@ -138,7 +135,17 @@ For BibTeX,
 ~~~
 ```
 
-Citation information can be automatically retrieved using a unique DOI or Semantic Scholar ID:
+~~~ bibliography
+@inproceedings{conlen2021,
+  title={Idyll Studio: A structured editor for authoring interactive \& data-driven articles},
+  author={Conlen, Matthew and Vo, Megan and Tan, Alan and Heer, Jeffrey},
+  booktitle={The 34th Annual ACM Symposium on User Interface Software and Technology},
+  pages={1--12},
+  year={2021}
+}
+~~~
+
+Citation information for inline references can be automatically retrieved using a unique DOI or Semantic Scholar ID:
 
 ::: table {#tablename}
 | Type | Syntax       | Value       |
@@ -151,22 +158,13 @@ Citation information can be automatically retrieved using a unique DOI or Semant
 | Citations
 :::
 
-Citations are also _interactive_: click/tap a citation to view a pop-up with more information.
+Citations are also interactive: clicking on a citation will allow you to view a pop-up with more information such as the title, authors, and a TLDR.
 
-~~~ bibliography
-@inproceedings{conlen2021,
-  title={Idyll Studio: A structured editor for authoring interactive \& data-driven articles},
-  author={Conlen, Matthew and Vo, Megan and Tan, Alan and Heer, Jeffrey},
-  booktitle={The 34th Annual ACM Symposium on User Interface Software and Technology},
-  pages={1--12},
-  year={2021}
-}
-~~~
 
 
 # Cross-References and Notes
 
-Similar to citations, cross-references are also _interactive_
+Similar to citations, cross-references are also interactive: clicking on a cross-reference will allow you to view a pop-up with a minimized view of the referenced content.
 
 ::: table {#cr}
 | Type | Syntax       | Value       |
@@ -178,15 +176,68 @@ Similar to citations, cross-references are also _interactive_
 | Cross-References
 :::
 
-# Interactive Figures
+# Dynamic Content
 
-Living Papers support *interactive* content using JavaScript code blocks and an extensible component system, all connected via a shared reactive runtime.
-The runtime automatically re-evaluates page content in response to interactive updates.
+Living Papers suppors interactive content using JavaScript code blocks and an extensible component system, all connected via a shared reactive runtime. The runtime automatically re-evaluates page content in response to interactive updates.
 
 Living Papers uses the same JavaScript dialect as [Observable notebooks](https://observablehq.com/@observablehq/a-taste-of-observable).
 We can define variables, add input widgets, and generate figures (e.g., using [Vega-Lite](https://observablehq.com/@observablehq/vega-lite) or [Observable Plot](https://observablehq.com/@observablehq/plot)) just as we would in a notebook.
-We can also directly import content from public Observable notebooks, like this [D3](https://d3js.org/)-based [line chart of unemployment rates by U.S. county](https://observablehq.com/@d3/multi-line-chart):
 
+Here we can define two variables `x` and `y`.
+```
+~~~ js
+x = 0
+---
+y = 15
+~~~
+
+```
+~~~ js {hide=true}
+x = 0
+---
+y = 15
+~~~
+
+Using these variables, we can then define an interactive slider using the Observable Inputs component:
+```
+~~~ js 
+viewof slider = Inputs.range([x, y], { value: 5, step: 1, label: 'Slider' })
+~~~
+```
+
+~~~ js 
+viewof slider = Inputs.range([x, y], { value: 5, step: 1, label: 'Slider' })
+~~~
+
+
+
+We can directly access the value of the slider as well:
+
+```
+~~~ js 
+'Slider value: ' + slider
+~~~
+```
+
+~~~ js 
+'Slider value: ' + slider
+~~~
+
+
+
+We can also directly import content from public Observable notebooks, like this [D3](https://d3js.org/)-based [line chart of unemployment rates by U.S. county](https://observablehq.com/@d3/multi-line-chart). Using the code
+```
+~~~ js
+chartWidth = 775
+---
+import { chart as d3LineChart } with { chartWidth as width }
+from '@d3/multi-line-chart'
+---
+d3LineChart
+~~~
+```
+
+we get
 
 ``` js
 chartWidth = 775
@@ -197,14 +248,32 @@ from '@d3/multi-line-chart'
 d3LineChart
 ```
 
-which was achieved with the code:
-```
-``` js
-chartWidth = 775
----
-import { chart as d3LineChart } with { chartWidth as width }
-from '@d3/multi-line-chart'
----
-d3LineChart
-```
-```
+# Setting Up Living Papers
+
+To get started with Living Papers yourself, the [Living Papers template](https://github.com/uwdata/living-papers-template/) is a great starting point. Simply copy the repository and mkae edits in the `index.md` file to create your own interactive documents. Any external files such as figures and datasets should go in the `assets` folder. 
+
+Living Papers requires installing [`Node.js >= v17.17` and `npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), and [`pandoc >= 2.18`](https://pandoc.org/installing.html). Other optional software packages such as for R will require installation as well. (TeX Live)[https://www.tug.org/texlive/] is needed for publishing LaTeX/PDF output.
+
+A workflow for setting up Living Papers will involve:
+
+1. Cloning or copying the contents of the [template repository](https://github.com/uwdata/living-papers-template/)
+
+2. Installing all the required packages
+
+3. Running `npm i` to install JavaScript dependencies
+
+4. Editing `index.md` to create your own content!
+
+# Command Line Tools
+
+You can run commands in the terminal to help you in managing your Living Papers document
+
+::: table {#cl}
+| Command | Output      |
+| :--------- | ----------- | 
+| `npm run build` | Compiles the article to a web page located in the `build` directory | 
+| `npm run watch` | Launches a local web server and displays the web page in the browser. Automatically recompile `index.md` when changes are made| 
+| `npm run deploy` | Publishes the article to [GitHub pages](https://pages.github.com/) by copying the content of the `build` folder to GitHub page| 
+
+| Commands
+:::
